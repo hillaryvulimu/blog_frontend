@@ -1,0 +1,30 @@
+/* Custom CSS for the slideshow */
+.carousel-item img {
+  max-width: 80%;
+  margin: auto;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+  height:60vh;
+
+}
+
+.carousel-caption h3 {
+  width: 100%;
+  padding: 10px;
+  color: black;
+  border-radius: 5px;
+}
+
+/* custom CSS for latest posts */
+.latest-posts {
+  margin-top: 15px;
+}
+
+/* Custom CSS for smaller images on small screens */
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+  .smaller-image {
+    max-height: 250px; /* Ensure image does not exceed container width */
+    
+  }
+}
