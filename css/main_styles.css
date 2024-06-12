@@ -28,3 +28,9 @@
     
   }
 }
+
+
+/* Custom CSS for posts card on blogs list */
+p.post-info, p.author {
+  font-size: 12px;
+}

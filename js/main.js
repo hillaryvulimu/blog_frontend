@@ -52,6 +52,15 @@ async function loadContent() {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
       htmlTag.setAttribute('data-bs-theme', savedTheme);
+
+      if (savedTheme === 'light') {
+        darkIcon.style.display = 'inline-block'
+        lightIcon.style.display = 'none'
+      }
+      else {
+        lightIcon.style.display = 'inline-block'
+        darkIcon.style.display = 'none'
+      }
   }
   else {
     // show darkIcon if no savedTheme, coz it'll be light by default
