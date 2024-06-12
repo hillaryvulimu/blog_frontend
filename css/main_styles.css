@@ -34,3 +34,7 @@
 p.post-info, p.author {
   font-size: 12px;
 }
+
+.card-text {
+  white-space: pre-line; /* Preserves newline characters and collapses spaces */
+}

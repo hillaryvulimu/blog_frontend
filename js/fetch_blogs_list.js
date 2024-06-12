@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     postElement.classList.add('col-md-4', 'mb-4');
 
     postElement.innerHTML = `
-      <a href="${post.slug}" class="text-decoration-none text-dark">
+      <a href="./blog_detail.html?slug=${post.slug}" class="text-decoration-none text-dark">
         <div class="card h-100">
           <img src="${post.post_pic}" class="card-img-top img-fluid" alt="${post.title}">
           <div class="card-body">
