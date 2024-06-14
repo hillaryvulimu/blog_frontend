@@ -3,13 +3,14 @@
 export default async function fetchBlogs(options = {}) {
     const {
         endpoint = 'http://127.0.0.1:8000/api/v1/', // Default endpoint
+        page = null,
         searchTerm = '',
         category = '',
         slug = ''
     } = options;
 
-    let url = endpoint;
-
+    // use default endpoint if the page's not specified.
+    let url = page != null ? endpoint + `?page=${page}` : endpoint;
     if (slug) {
         url += `${slug}/`;
     } else if (searchTerm) {

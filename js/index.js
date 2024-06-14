@@ -149,14 +149,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const homeBlogCardsContainer = document.getElementById('latest-posts')
 
   try {
-      const data = await fetchBlogs({ endpoint: 'http://127.0.0.1:8000/api/v1/' });
+      const data = await fetchBlogs({ page: 1});
       // create slide show with 4 blogs
-      const slideshowFragment = createSlideshow(data.slice(0, 4));
+      const slideshowFragment = createSlideshow(data.results.slice(0, 4));
       
       slideshowContainer.appendChild(slideshowFragment);
 
       // create 6 sample blog cards
-      const cardsFragment = createHomeBlogCards(data.slice(0, 6));
+      const cardsFragment = createHomeBlogCards(data.results.slice(0, 6));
       homeBlogCardsContainer.appendChild(cardsFragment)
   } catch (error) {
       console.error('Error fetching or displaying posts:', error);

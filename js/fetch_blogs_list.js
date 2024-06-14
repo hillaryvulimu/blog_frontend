@@ -1,23 +1,5 @@
 import fetchBlogs from './common/fetchBlogs.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
-const postsContainer = document.getElementById('posts-container');
-
-  try {
-      const data = await fetchBlogs({ endpoint: 'http://127.0.0.1:8000/api/v1/' });
-      // Using fragment to avoid reflows & repaints
-      const fragment = document.createDocumentFragment();
-      data.forEach(post => {
-          const postElement = createPostCard(post);
-          fragment.appendChild(postElement);
-      });
-      postsContainer.appendChild(fragment);
-  } catch (error) {
-      console.error('Error fetching or displaying posts:', error);
-  }
-});
-
-  
 // Helper function to format date created
 function formatDateTime(dateTimeString) {
   const postDate = new Date(dateTimeString);
@@ -68,3 +50,93 @@ function createPostCard(post) {
 
   return postElement;
 }
+
+
+// function to update pagination
+function updatePaginationControls(page, totalPages) {
+  const blogsUrl = './blogs.html'
+  const paginationContainer = document.getElementById('pagination-container');
+  paginationContainer.innerHTML = '';
+
+  const paginationElement = document.createElement('nav');
+  paginationElement.setAttribute('aria-label', 'Page navigation');
+  const paginationList = document.createElement('ul');
+  paginationList.classList.add('pagination');
+
+  // Previous button
+  const prevItem = document.createElement('li');
+  prevItem.classList.add('page-item');
+  if (page === 1) {
+    prevItem.classList.add('disabled');
+  }
+  const prevLink = document.createElement('a');
+  prevLink.classList.add('page-link');
+  prevLink.href = `${blogsUrl}?page=${page-1}`;
+  prevLink.textContent = 'Previous';
+  
+  prevItem.appendChild(prevLink);
+  paginationList.appendChild(prevItem);
+
+  // Page numbers
+  for (let i = 1; i <= totalPages; i++) {
+    const pageItem = document.createElement('li');
+    pageItem.classList.add('page-item');
+    if (i === page) {
+      pageItem.classList.add('active');
+    }
+    const pageLink = document.createElement('a');
+    pageLink.classList.add('page-link');
+    pageLink.href = `${blogsUrl}?page=${i}`;
+    pageLink.textContent = i;
+
+    pageItem.appendChild(pageLink);
+    paginationList.appendChild(pageItem);
+  }
+
+  // Next button
+  const nextItem = document.createElement('li');
+  nextItem.classList.add('page-item');
+  if (page === totalPages) {
+    nextItem.classList.add('disabled');
+  }
+  const nextLink = document.createElement('a');
+  nextLink.classList.add('page-link');
+  nextLink.href = `${blogsUrl}?page=${page+1}`;
+  nextLink.textContent = 'Next';
+  
+  nextItem.appendChild(nextLink);
+  paginationList.appendChild(nextItem);
+
+  paginationElement.appendChild(paginationList);
+  paginationContainer.appendChild(paginationElement);
+}
+  
+
+
+// fetch blogs, and update DOM
+document.addEventListener('DOMContentLoaded', async () => {
+  const postsContainer = document.getElementById('posts-container');
+  
+    try {
+      // get page number from url
+      const urlParams = new URLSearchParams(window.location.search);
+      let pageNum = urlParams.get('page');
+      pageNum = pageNum ? parseInt(pageNum, 10) : 1; // coz page num is passed as string
+
+      // fetch data for each page
+      const data = await fetchBlogs({ page: pageNum });
+      // Using fragment to avoid reflows & repaints
+      const fragment = document.createDocumentFragment();
+      data.results.forEach(post => {
+          const postElement = createPostCard(post);
+          fragment.appendChild(postElement);
+      });
+      postsContainer.appendChild(fragment);
+
+      // update pagination accordingly, getting page number from url
+      updatePaginationControls(pageNum, Math.ceil(data.count / 12));
+
+    } catch (error) {
+        console.error('Error fetching or displaying posts:', error);
+    }
+  });
