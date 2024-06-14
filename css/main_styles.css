@@ -38,3 +38,42 @@ p.post-info, p.author {
 .card-text {
   white-space: pre-line; /* Preserves newline characters and collapses spaces */
 }
+
+
+/* Custom CSS for scroll to top svg */
+#scroll-to-top {
+  cursor: pointer;
+  position: fixed;
+  bottom: 10px;
+  right: 5px;
+  width: 50px;
+  height: 50px;
+  z-index: 100;
+
+  display: none;  
+}
+
+/* Custom CSS for carousel items */
+.carousel-caption {
+  left: 10%;
+  right: 10%;
+  bottom: .5rem;
+  background-color: rgba(128, 128, 128, 0.486);
+}
+
+.carousel-caption a {
+  color: #e20000;
+  font-weight: bolder;
+
+  transition: color .15s;
+}
+
+.carousel-caption a:hover {
+  color: #fb0000;
+}
+
+
+.carousel-caption p {
+  font-weight: bold;
+  color: black;
+}

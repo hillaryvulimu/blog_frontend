@@ -48,6 +48,27 @@ async function loadContent() {
   const darkIcon = document.getElementById('dark-icon')
   const lightIcon = document.getElementById('light-icon')
 
+  /* Add scroll to top */
+  const scrollToTopBtn = document.getElementById('scroll-to-top')
+
+  // Show/hide the button based on scroll position
+  window.addEventListener('scroll', function() {
+    // Adjust the threshold as needed (e.g., 200 pixels)
+    if (window.scrollY > 200) {
+        scrollToTopBtn.style.display = 'block';
+    } else {
+        scrollToTopBtn.style.display = 'none';
+    }
+  });
+
+
+  scrollToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  })
+
   // Load the current theme from local storage if abailable
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
@@ -88,5 +109,6 @@ async function loadContent() {
 }
 
 loadContent();
+
 
 
