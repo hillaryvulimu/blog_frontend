@@ -1,4 +1,4 @@
-import fetchBlogs from './common/fetchBlogs.js';
+import fetchPosts from './common/fetchPosts.js';
 
 // Helper function to format date created
 function formatDateTime(dateTimeString) {
@@ -33,7 +33,7 @@ function createPostCard(post) {
   postElement.classList.add('col-md-4', 'mb-4');
 
   postElement.innerHTML = `
-    <a href="./blog_detail.html?nm=${post.slug}" class="text-decoration-none text-dark">
+    <a href="./post_detail.html?nm=${post.slug}" class="text-decoration-none text-dark">
       <div class="card h-100">
         <img src="${post.post_pic}" class="card-img-top img-fluid" alt="${post.title}">
         <div class="card-body">
@@ -54,7 +54,7 @@ function createPostCard(post) {
 
 // function to update pagination
 function updatePaginationControls(page, totalPages) {
-  const blogsUrl = './blogs.html'
+  const postsUrl = './posts.html'
   const paginationContainer = document.getElementById('pagination-container');
   paginationContainer.innerHTML = '';
 
@@ -71,7 +71,7 @@ function updatePaginationControls(page, totalPages) {
   }
   const prevLink = document.createElement('a');
   prevLink.classList.add('page-link');
-  prevLink.href = `${blogsUrl}?page=${page-1}`;
+  prevLink.href = `${postsUrl}?page=${page-1}`;
   prevLink.textContent = 'Previous';
   
   prevItem.appendChild(prevLink);
@@ -86,7 +86,7 @@ function updatePaginationControls(page, totalPages) {
     }
     const pageLink = document.createElement('a');
     pageLink.classList.add('page-link');
-    pageLink.href = `${blogsUrl}?page=${i}`;
+    pageLink.href = `${postsUrl}?page=${i}`;
     pageLink.textContent = i;
 
     pageItem.appendChild(pageLink);
@@ -96,12 +96,14 @@ function updatePaginationControls(page, totalPages) {
   // Next button
   const nextItem = document.createElement('li');
   nextItem.classList.add('page-item');
-  if (page === totalPages) {
+  //disable btn on last page, or on  pages that have few items making
+  // Math func result in NaN, e.g. category with <12 items
+  if (page === totalPages || !totalPages) {
     nextItem.classList.add('disabled');
   }
   const nextLink = document.createElement('a');
   nextLink.classList.add('page-link');
-  nextLink.href = `${blogsUrl}?page=${page+1}`;
+  nextLink.href = `${postsUrl}?page=${page+1}`;
   nextLink.textContent = 'Next';
   
   nextItem.appendChild(nextLink);
@@ -113,25 +115,50 @@ function updatePaginationControls(page, totalPages) {
   
 
 
-// fetch blogs, and update DOM
+// fetch posts, and update DOM
 document.addEventListener('DOMContentLoaded', async () => {
   const postsContainer = document.getElementById('posts-container');
   
     try {
       // get page number from url
       const urlParams = new URLSearchParams(window.location.search);
+      let category = urlParams.get('category')
       let pageNum = urlParams.get('page');
       pageNum = pageNum ? parseInt(pageNum, 10) : 1; // coz page num is passed as string
 
-      // fetch data for each page
-      const data = await fetchBlogs({ page: pageNum });
-      // Using fragment to avoid reflows & repaints
-      const fragment = document.createDocumentFragment();
-      data.results.forEach(post => {
-          const postElement = createPostCard(post);
-          fragment.appendChild(postElement);
-      });
-      postsContainer.appendChild(fragment);
+      // fetch data based on available options 
+      const listTitle = document.getElementById('lists-title') // show category, search term, etc     
+      let options = {}
+      if(pageNum){
+        options.page = pageNum
+      }
+      if (category){
+        options.category = category
+        listTitle.textContent = category
+      }
+
+      const data = await fetchPosts(options);
+
+      // use the data to generate content
+      if(category){
+        postsContainer.appendChild(loopThruData(data)); 
+
+        // add active class to item on categories menu
+        const anchorTags = document.querySelectorAll('.category-link');
+    
+        anchorTags.forEach(anchorTag => {
+          // Check if the text content of the anchor tag matches the category
+          if (anchorTag.textContent === category) {
+            // Add the custom-active-class to the parent list item
+            anchorTag.classList.add('active');
+            anchorTag.style.textDecoration = 'underline'
+            console.log(anchorTag.classList)
+          }
+        });
+      }
+      else {
+        postsContainer.appendChild(loopThruData(data.results)); 
+      }
 
       // update pagination accordingly, getting page number from url
       updatePaginationControls(pageNum, Math.ceil(data.count / 12));
@@ -140,3 +167,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching or displaying posts:', error);
     }
   });
+
+
+  // function to loop thru data
+  function loopThruData(data){
+     // Using fragment to avoid reflows & repaints
+    const fragment = document.createDocumentFragment();
+      data.forEach(post => {
+          const postElement = createPostCard(post);
+          fragment.appendChild(postElement);
+      });
+      
+      return fragment
+  }
+  

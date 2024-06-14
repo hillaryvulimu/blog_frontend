@@ -77,3 +77,13 @@ p.post-info, p.author {
   font-weight: bold;
   color: black;
 }
+
+
+/* Custom css for categories menu */
+#dropdown-categories-list li a {
+  text-decoration: none;
+}
+
+#dropdown-categories-list li a:hover {
+  text-decoration: underline;
+}

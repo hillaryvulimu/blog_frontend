@@ -1,4 +1,4 @@
-import fetchBlogs from './common/fetchBlogs.js';
+import fetchPosts from './common/fetchPosts.js';
 
 /* slideshow function */
 function createSlideshow(data) {
@@ -43,7 +43,7 @@ function createSlideshow(data) {
       const titleElement = document.createElement('h5');
       const titleLink = document.createElement('a');
       titleLink.classList.add('carousel-link-item')
-      titleLink.href = `./blog_detail.html?nm=${post.slug}`;
+      titleLink.href = `./post_detail.html?nm=${post.slug}`;
       titleLink.textContent = post.title;
       
 
@@ -69,8 +69,8 @@ function createSlideshow(data) {
 }
 
 
-/* function to create blogs cards for home page */
-function createHomeBlogCards(data){
+/* function to create posts cards for home page */
+function createHomePostCards(data){
   //create fragment
   const fragment = document.createDocumentFragment();
   // TODO: loop through the data
@@ -127,7 +127,7 @@ function createHomeBlogCards(data){
 
 
     const postLink = document.createElement('a')
-    postLink.setAttribute('href', './blog_detail.html?nm=' +post.slug)
+    postLink.setAttribute('href', './post_detail.html?nm=' +post.slug)
     postLink.classList.add('btn', 'btn-link')
     postLink.textContent = 'Read more >'
     postLink.style.paddingLeft = 0
@@ -146,18 +146,18 @@ function createHomeBlogCards(data){
 
 document.addEventListener('DOMContentLoaded', async () => {
   const slideshowContainer = document.getElementById('latest-posts-slideshow'); 
-  const homeBlogCardsContainer = document.getElementById('latest-posts')
+  const homePostCardsContainer = document.getElementById('latest-posts')
 
   try {
-      const data = await fetchBlogs({ page: 1});
-      // create slide show with 4 blogs
+      const data = await fetchPosts({ page: 1});
+      // create slide show with 4 posts
       const slideshowFragment = createSlideshow(data.results.slice(0, 4));
       
       slideshowContainer.appendChild(slideshowFragment);
 
-      // create 6 sample blog cards
-      const cardsFragment = createHomeBlogCards(data.results.slice(0, 6));
-      homeBlogCardsContainer.appendChild(cardsFragment)
+      // create 6 sample post cards
+      const cardsFragment = createHomePostCards(data.results.slice(0, 6));
+      homePostCardsContainer.appendChild(cardsFragment)
   } catch (error) {
       console.error('Error fetching or displaying posts:', error);
   }

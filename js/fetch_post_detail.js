@@ -1,4 +1,4 @@
-import fetchBlogs from './common/fetchBlogs.js';
+import fetchPosts from './common/fetchPosts.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   // Get the slug from the URL
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const slug = urlParams.get('nm');
 
   try {
-    const data = await fetchBlogs({ endpoint: 'http://127.0.0.1:8000/api/v1/' + slug });
+    const data = await fetchPosts({ endpoint: 'http://127.0.0.1:8000/api/v1/' + slug });
     
     createPostDetails(data);
 

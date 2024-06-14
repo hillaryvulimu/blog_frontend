@@ -1,6 +1,6 @@
 /* fetch data and pass it to the file that used it */
 
-export default async function fetchBlogs(options = {}) {
+export default async function fetchPosts(options = {}) {
     const {
         endpoint = 'http://127.0.0.1:8000/api/v1/', // Default endpoint
         page = null,
@@ -9,16 +9,19 @@ export default async function fetchBlogs(options = {}) {
         slug = ''
     } = options;
 
-    // use default endpoint if the page's not specified.
-    let url = page != null ? endpoint + `?page=${page}` : endpoint;
+    // use default endpoint if endpoint not specified.
+    let url = endpoint;
     if (slug) {
         url += `${slug}/`;
     } else if (searchTerm) {
         url += `?search=${encodeURIComponent(searchTerm)}`;
     } else if (category) {
-        url += `?category=${encodeURIComponent(category)}`;
+        url += `categories/${encodeURIComponent(category)}`;
     }
 
+    // add page number if specified
+    url += page > 1 ? '' + `?page=${page}` : '';
+    
     try {
         const response = await fetch(url);
 
