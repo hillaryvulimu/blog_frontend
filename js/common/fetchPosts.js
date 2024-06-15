@@ -14,7 +14,7 @@ export default async function fetchPosts(options = {}) {
     if (slug) {
         url += `${slug}/`;
     } else if (searchTerm) {
-        url += `?search=${encodeURIComponent(searchTerm)}`;
+        url += `?q=${encodeURIComponent(searchTerm)}`;
     } else if (category) {
         url += `categories/${encodeURIComponent(category)}`;
     }

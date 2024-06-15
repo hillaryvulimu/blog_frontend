@@ -87,3 +87,20 @@ p.post-info, p.author {
 #dropdown-categories-list li a:hover {
   text-decoration: underline;
 }
+
+
+/* Custom css for search area */
+#search-container {
+  position: relative; /* Ensure the container is relatively positioned */
+}
+
+#search-results {
+  position: absolute;
+  top: 100%; /* Position the results container below the search input */
+  left: 0;
+  z-index: 1000; /* Ensure results appear above other content */
+  width: 100%; /* Ensure results container spans full width */
+  border-top: none; /* Optional: Remove top border to blend with search input */
+  max-height: 400px; /* Optional: Add max height if you want to limit height */
+  overflow-y: auto; /* Optional: Add scrollbars if results overflow */
+}

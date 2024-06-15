@@ -152,7 +152,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Add the custom-active-class to the parent list item
             anchorTag.classList.add('active');
             anchorTag.style.textDecoration = 'underline'
-            console.log(anchorTag.classList)
           }
         });
       }
