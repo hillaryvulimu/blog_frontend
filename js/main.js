@@ -1,3 +1,6 @@
+import logout from './common/logout.js'
+import categories from './common/fetch_categories.js'
+
 /* Function to add `active` class to active link */
 function highlightActiveLinks() {
   // Get the current URL pathname
@@ -38,9 +41,9 @@ async function loadContent() {
   const footerContent = await footerResponse.text();
   document.getElementById('footer').innerHTML = footerContent;
 
-  // After loading header and footer content, execute script for highlighting active links
+  // After loading header and footer content, highlight active links, and load categories
   highlightActiveLinks();
-
+  categories();
 
   /* Toggle Light/Dark modes */
   const modeBtn = document.getElementById('theme-toggle')
@@ -61,13 +64,30 @@ async function loadContent() {
     }
   });
 
-
   scrollToTopBtn.addEventListener('click', () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
   })
+
+  // hide login/signup pages if logged in, hide Logout, if not
+  const token = localStorage.getItem('authToken'); 
+  const signupLink  = document.getElementById('signup-link')
+  const loginLink = document.getElementById('login-link')
+  const logoutLink  = document.getElementById('logout-link')
+  const profilePic = document.getElementById('profile-pic')
+
+  if(token){
+    logoutLink.classList.remove('d-none')
+    profilePic.classList.remove('d-none')
+  } else{
+    signupLink.classList.remove('d-none')
+    loginLink.classList.remove('d-none')
+  }
+
+  // Logout functionality
+  logout()
 
   // Load the current theme from local storage if abailable
   const savedTheme = localStorage.getItem('theme');
@@ -111,4 +131,10 @@ async function loadContent() {
 loadContent();
 
 
+// Save current location (except login) to storage to redir to after login
+const currentPath = window.location.pathname;
+const lastSegment = currentPath.substring(currentPath.lastIndexOf('/') + 1);
 
+if (lastSegment !== 'login.html' && lastSegment !== 'signup.html') {
+  sessionStorage.setItem('lastVisitedPage', window.location.href);
+}
