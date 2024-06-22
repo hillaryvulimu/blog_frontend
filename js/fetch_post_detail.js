@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // helper function to create the post details
   function createPostDetails(post){
     const postDetails = document.getElementById('post-details');
+
+    postDetails.setAttribute('data-post-slug', post.slug) // for getting id e.g. for likes/dislikes
     postDetails.innerHTML = `
     <div class="card">
       <div class="card-body">
@@ -29,10 +31,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
      </div>
     `;
+    
+    document.title = post.title
+
+    // Add the post id in the Local storage
+    localStorage.setItem('post_id', post.id)
   }
 });
 
+// Format date accordingly
 function formatDateTime(dateTimeString) {
   const postDate = new Date(dateTimeString);
-  return postDate.toLocaleString(); // Adjust formatting as needed
+  return postDate.toLocaleString(); 
 }

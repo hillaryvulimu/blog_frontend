@@ -18,9 +18,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     method: 'POST',
     body: formData
   })
-  .then(response => {
-    return response.json();
-  })
+  .then(response => response.json())
   .then(data => {
     if (data.key) {
       localStorage.setItem('authToken', data.key);

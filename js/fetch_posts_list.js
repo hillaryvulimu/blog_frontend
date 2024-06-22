@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       // use the data to generate content
       if(category){
+        document.title = category + ' Category'
         postsContainer.appendChild(loopThruData(data)); 
 
         // add active class to item on categories menu

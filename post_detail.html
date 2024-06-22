@@ -12,16 +12,60 @@
   
   <main class="container mt-4">
     <div id="post-details">
-        <!-- Post details will be dynamically added here -->
+      <!-- Post details will be dynamically added here -->
     </div>
+    
+    <!-- Like/Dislike -->
+    <div class="reactions-div text-left my-3">
+      <!-- Modal displayed if reaction clicked before logging in -->
+      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              You need to login first before you can react.
+            </div>
+            <div class="modal-footer">
+              <a href="./login.html" class="btn btn-primary">Login</a>
+              <a href="./signup.html" class="btn btn-success">Signup</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- show errors -->
+      <div class="alert alert-danger d-none" id="reaction-erros"></div>
+      
+      <div class="d-inline-flex align-items-center">
+        <span id="likes-count" class="fs-5 me-2"></span>
+        
+        <!-- Like btn -->
+        <button id="like-btn" value="None" class="btn btn-link p-0 me-3">
+          <svg xmlns="http://www.w3.org/2000/svg" id="like-btn-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up">
+            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+          </svg>
+        </button>
+        
+        <!-- Dislike btn -->
+        <button id="dislike-btn" class="btn btn-link p-0">
+          <svg xmlns="http://www.w3.org/2000/svg" id="dislike-btn-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-down">
+            <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
   </main>
-  
   
   <footer id="footer"></footer>
   
   <!-- custom scripts -->
   <script type="module" src="./js/main.js"></script>
   <script src="./js/fetch_post_detail.js" type="module"></script>
+  <script type="module" src="./js/reactions.js"></script>
   
   <!-- Bootstrap js -->
   <script src="./js/common/load_bootstrap.js"></script>

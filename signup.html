@@ -9,79 +9,115 @@
 </head>
 <body>
   <header class="sticky-top" id="header"></header>
-    <div class="row justify-content-center align-items-center">
-      <div class="col-md-6" id="signup-form-container">
-        <h1 class="text-center mb-4">Sign Up</h1>
-
-        <!-- Form Errors -->
-        <div id="form-errors" class="alert alert-danger d-none" role="alert">
-          <!-- Error messages will be dynamically inserted here -->
-        </div>
-        
-        <!-- Sign Up Form -->
-        <form id="signup-form" class="mb-4" enctype="multipart/form-data">
-          <!-- Username Field -->
-          <div class="mb-3">
-            <label for="username" class="form-label">Username<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="username" name="username" required>
-          </div>
-          
-          <!-- First Name Field -->
-          <div class="mb-3">
-            <label for="firstName" class="form-label">First Name<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="firstName" name="firstName" required>
-          </div>
-          
-          <!-- Last Name Field -->
-          <div class="mb-3">
-            <label for="lastName" class="form-label">Last Name<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="lastName" name="lastName" required>
-          </div>
-          
-          <!-- Email Field -->
-          <div class="mb-3">
-            <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
-            <input type="email" class="form-control" id="email" name="email" required>
-          </div>
-          
-          <!-- Password Field -->
-          <div class="mb-3">
-            <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
-            <input type="password" class="form-control" id="password" name="password" required>
-          </div>
-          
-          <!-- Confirm Password Field -->
-          <div class="mb-3">
-            <label for="confirmPassword" class="form-label">Confirm Password<span class="text-danger">*</span></label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-          </div>
-          
-          <!-- Profile Pic Field -->
-          <div class="mb-3">
-            <label for="profilePic" class="form-label">Profile Pic</label>
-            <input type="file" class="form-control" id="profilePic" name="profilePic" accept="image/*">
-          </div>
-
-          <!-- Sign Up Button -->
-          <div class="mt-4">
-            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
-          </div>
-        </form>
-        
-        <!-- Social Media Sign Up Button -->
-        <div class="mb-3">
-          <button type="button" class="btn btn-danger w-100">
-            <i class="bi bi-google"></i> Sign Up with Google
-          </button>
-        </div>
-
-        
-        <!-- Login Link -->
-        <p class="text-center mt-3">Already have an account? <a href="login.html">Login here</a></p>
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6" id="signup-form-container">
+      <h1 class="text-center mb-4">Sign Up</h1>
+      
+      <!-- Form Errors -->
+      <div id="form-errors" class="alert alert-danger d-none" role="alert">
+        <!-- Form error messages will be dynamically inserted here -->
       </div>
+      
+      <!-- Sign Up Form -->
+      <form id="signup-form" class="mb-4">
+        <!-- Username Field -->
+        <div class="mb-3">
+          <label for="username" class="form-label">Username<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="username" name="username" required>
+          <div id="username_error" class="text-danger d-none">
+            <!-- Error message for username will be dynamically inserted here -->
+            
+          </div>
+        </div>
+        
+        <!-- First Name Field -->
+        <div class="mb-3">
+          <label for="first_name" class="form-label">First Name<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="first_name" name="first_name" required>
+          <div id="first_name_error" class="text-danger d-none">
+            <!-- Error message for first_name will be dynamically inserted here -->
+            
+          </div>
+        </div>
+        
+        <!-- Last Name Field -->
+        <div class="mb-3">
+          <label for="last_name" class="form-label">Last Name<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="last_name" name="last_name" required>
+          <div id="last_name_error" class="text-danger d-none">
+            <!-- Error message for last_name will be dynamically inserted here -->
+            
+          </div>
+        </div>
+        
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+          <input type="email" class="form-control" id="email" name="email" required>
+          <div id="email_error" class="text-danger d-none">
+            <!-- Error message for email will be dynamically inserted here -->
+            
+          </div>
+        </div>
+        
+        <!-- Password Field 1 -->
+        <div class="mb-3">
+          <label for="password1" class="form-label">Password<span class="text-danger">*</span></label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password1" name="password1" required placeholder="At least 8 characters.">
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword1">
+              <!-- Eye status SVG -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                <title>ionicons-v5-i</title>
+                <path d="M255.66,112c-77.94,0-157.89,45.11-220.83,135.33a16,16,0,0,0-.27,17.77C82.92,340.8,161.8,400,255.66,400,348.5,400,429,340.62,477.45,264.75a16.14,16.14,0,0,0,0-17.47C428.89,172.28,347.8,112,255.66,112Z" style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+                <circle cx="256" cy="256" r="80" style="fill:none;stroke:currentColor;stroke-miterlimit:10;stroke-width:32px"/>
+              </svg>
+            </button>
+          </div>
+          <div id="password1_error" class="text-danger d-none">
+            <!-- Error message for password1 will be dynamically inserted here -->
+          </div>
+        </div>
+        
+        <!-- Confirm Password Field -->
+        <div class="mb-3">
+          <label for="password2" class="form-label">Confirm Password<span class="text-danger">*</span></label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password2" name="password2" required>
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword2">
+              <!-- Eye status SVG -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                <title>ionicons-v5-i</title>
+                <path d="M255.66,112c-77.94,0-157.89,45.11-220.83,135.33a16,16,0,0,0-.27,17.77C82.92,340.8,161.8,400,255.66,400,348.5,400,429,340.62,477.45,264.75a16.14,16.14,0,0,0,0-17.47C428.89,172.28,347.8,112,255.66,112Z" style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+                <circle cx="256" cy="256" r="80" style="fill:none;stroke:currentColor;stroke-miterlimit:10;stroke-width:32px"/>
+              </svg>
+            </button>
+          </div>
+          <div id="password2_error" class="text-danger d-none">
+            <!-- Error message for password2 will be dynamically inserted here -->
+          </div>
+        </div>
+        
+        <!-- Sign Up Button -->
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary w-100" id="submit-button">Sign Up</button>
+        </div>
+      </form>
+      
+      <!-- Social Media Sign Up Button -->
+      <div class="mb-3">
+        <button type="button" class="btn btn-danger w-100">
+          <i class="bi bi-google"></i> Sign Up with Google
+        </button>
+      </div>
+      
+      
+      <!-- Login Link -->
+      <p class="text-center mt-3">Already have an account? <a href="login.html">Login here</a></p>
     </div>
+  </div>
   <main class="container-fluid">
-
+    
   </main> 
   
   <footer id="footer"></footer>
