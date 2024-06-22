@@ -1,3 +1,4 @@
+import { posts_base_endpoint } from "./common/endpoints.js";
 document.addEventListener('DOMContentLoaded', async () => {
   const likeBtn = document.getElementById('like-btn');
   const dislikeBtn = document.getElementById('dislike-btn');
@@ -5,7 +6,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const dislikeBtnSvg = document.getElementById('dislike-btn-svg');
   const reactionErrors = document.getElementById('reaction-erros');
   const likesCountElement = document.getElementById('likes-count');
-  const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
   
   // Get postslug from post's data-post-slug attrib
   const urlParams = new URLSearchParams(window.location.search);
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function to update total likes count
 async function updateLikesCount() {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/v1/${postslug}/`, {
+    const response = await fetch(posts_base_endpoint + postslug, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ async function fetchCurrentReaction() {
     if (!token) {
       return
     }  
-    const response = await fetch(`http://127.0.0.1:8000/api/v1/${postslug}/reactions/user/`, {
+    const response = await fetch(`${posts_base_endpoint + postslug}/reactions/user/`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token ${token}`,
@@ -86,7 +86,7 @@ async function sendReaction(reaction) {
       return
     }
     // Fetch current user's reaction for the post
-    const response = await fetch(`http://127.0.0.1:8000/api/v1/${postslug}/reactions/user/`, {
+    const response = await fetch(`${posts_base_endpoint + postslug}/reactions/user/`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token ${token}`,
@@ -100,12 +100,12 @@ async function sendReaction(reaction) {
     const currentReaction = await response.json();
 
     // Determine whether to use POST or PATCH endpoint
-    let url = `http://127.0.0.1:8000/api/v1/${postslug}/reactions/user/create/`;
+    let url = `${posts_base_endpoint + postslug}/reactions/user/create/`;
     let method = 'POST'; // Default to POST if no reaction exists
 
     if (currentReaction.reaction) {
       // User has already reacted, switch to PATCH, because data sent is JSON
-      url = `http://127.0.0.1:8000/api/v1/${postslug}/reactions/user/`;
+      url = `${posts_base_endpoint + postslug}/reactions/user/`;
       method = 'PATCH';
     }
 
@@ -166,6 +166,9 @@ async function reactionBtnsActions(thisBtn, otherBtn, value){
     await sendReaction('None');
   }
 }
+
+// login/signup modal
+const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
 
 // Like button click event
 likeBtn.addEventListener('click', async function(e) {

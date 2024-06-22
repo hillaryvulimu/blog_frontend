@@ -1,3 +1,4 @@
+import { auth_endpoint } from "./common/endpoints.js";
 const token = localStorage.getItem('authToken');
 const lastVisitedPage = sessionStorage.getItem('lastVisitedPage') || './posts.html';
 
@@ -103,7 +104,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
   confirmPasswordErrors.textContent = '';
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/v1/dj-rest-auth/registration/', {
+    const response = await fetch(`${auth_endpoint}registration/`, {
       method: 'POST',
       body: formData,
     });

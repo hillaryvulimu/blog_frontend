@@ -1,3 +1,4 @@
+import { auth_endpoint } from "./common/endpoints.js";
 const token = localStorage.getItem('authToken');
 const lastVisitedPage = sessionStorage.getItem('lastVisitedPage') || './posts.html';
 
@@ -14,7 +15,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
   const usernameErrors = document.getElementById('username-error');
   const passwordErrors = document.querySelector('#password-error');
   
-  fetch('http://127.0.0.1:8000/api/v1/dj-rest-auth/login/', {
+  fetch(`${auth_endpoint}login/`, {
     method: 'POST',
     body: formData
   })

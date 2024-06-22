@@ -4,23 +4,26 @@ const bootstrapJsOffline = './misc/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.
 const bootstrapJsCDN = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'
 const bodyElement = document.querySelector('body')
 
+// set bootstrap js integrity constants
+const jsIntegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+const jsCrossorigin="anonymous"
+
 const loadBootstrapJs = () =>{
-  // chk internet connection. 
-  // if available, load CDN. 
-  // NOTE: add integrity and crossorigin attribs
-  const integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-  const crossorigin="anonymous"
-  
+  // check for local/cached bootstrap
+  const cachedJs = localStorage.getItem('bootstrapJsLink') || bootstrapJsOffline;
 
-  // Else, if no internet, load offline bootstrap from sessionStorage if available
-  if(!localStorage.getItem('bootstrapJsLink')){
-    localStorage.setItem('bootstrapJsLink', bootstrapJsOffline)
-  }
-  const bootstrapJsLink = localStorage.getItem('bootstrapJsLink')
+  // load cached js if available, else load cdn
+  const bootstrapJsLink = cachedJs ? cachedJs : bootstrapJsCDN;
 
-  // add to body
+  // create script tag 
   const bootstrapScript = document.createElement('script')
-  bootstrapScript.setAttribute('src', bootstrapJsLink) // add integrity/crossorigin to it if using CDN
+  bootstrapScript.src = bootstrapJsLink 
+
+  // add crossorigin and integrity when using CDN
+  if(!cachedJs){
+    bootstrapScript.integrity = jsIntegrity;
+    bootstrapScript.crossOrigin = jsCrossorigin;
+  }
 
   return bootstrapScript
 }

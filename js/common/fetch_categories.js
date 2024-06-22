@@ -1,8 +1,9 @@
 // Fetch categories to create categories menu
 // executed in main.js
 
+import { posts_base_endpoint } from "./endpoints.js";
 export default function categories() {
-  fetch('http://127.0.0.1:8000/api/v1/categories/')
+  fetch(`${posts_base_endpoint}categories/`)
     .then(response => response.json())
     .then(data => {
       const categoriesList = document.getElementById('dropdown-categories-list')

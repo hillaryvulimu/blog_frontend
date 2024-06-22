@@ -1,8 +1,9 @@
 /* fetch data and pass it to the file that used it */
 
+import { posts_base_endpoint } from "./endpoints.js";
 export default async function fetchPosts(options = {}) {
     const {
-        endpoint = 'http://127.0.0.1:8000/api/v1/', // Default endpoint
+        endpoint = posts_base_endpoint, // Default endpoint
         page = null,
         searchTerm = '',
         category = '',

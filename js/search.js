@@ -1,4 +1,5 @@
 import fetchPosts from './common/fetchPosts.js'
+import { posts_base_endpoint } from './common/endpoints.js';
 
 const searchInput = document.getElementById('search-input');
 const searchResultsContainer = document.getElementById('search-results');
@@ -11,7 +12,7 @@ searchInput.addEventListener('keyup', async (e) => {
   if (searchTerm) {
     try {
       const data = await fetchPosts({
-        endpoint: 'http://127.0.0.1:8000/api/v1/search/',
+        endpoint: `${posts_base_endpoint}search/`,
         searchTerm: searchTerm
       });
       

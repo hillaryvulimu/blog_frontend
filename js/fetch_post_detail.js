@@ -1,12 +1,12 @@
 import fetchPosts from './common/fetchPosts.js';
-
+import { posts_base_endpoint } from './common/endpoints.js'
 document.addEventListener('DOMContentLoaded', async () => {
   // Get the slug from the URL
   const urlParams = new URLSearchParams(window.location.search);
   const slug = urlParams.get('nm');
 
   try {
-    const data = await fetchPosts({ endpoint: 'http://127.0.0.1:8000/api/v1/' + slug });
+    const data = await fetchPosts({ endpoint: posts_base_endpoint + slug });
     
     createPostDetails(data);
 

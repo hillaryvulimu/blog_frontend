@@ -1,3 +1,4 @@
+import { auth_endpoint } from './endpoints.js';
 export default async function logout() {
   const token = localStorage.getItem('authToken');
   document.getElementById('logout-button').addEventListener('click', (e) => {
@@ -5,7 +6,7 @@ export default async function logout() {
     // get last visited page
     const lastVisited = sessionStorage.getItem('lastVisitedPage') || './login.html'
     if (token) {
-      fetch('http://127.0.0.1:8000/api/v1/dj-rest-auth/logout/', {
+      fetch(`${auth_endpoint}logout/`, {
       method: 'POST',
       headers: {
         'Authorization': `Token ${token}` // token in local storage
