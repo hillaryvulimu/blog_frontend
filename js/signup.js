@@ -55,8 +55,9 @@ const pw1 = document.getElementById('password1')
 const pw2 = document.getElementById('password2')
 const confirmPasswordErrors = document.getElementById('password2_error');
 
-pw2.addEventListener('input', () => {
-  if(pw2.value && pw2.value != pw1.value) {
+// function to check
+function pwMatch(thisField){
+  if(thisField.value && pw2.value != pw1.value) {
     submitBtn.classList.add('disabled')
     confirmPasswordErrors.classList.remove('d-none');
     confirmPasswordErrors.textContent = 'Passwords do not match.';
@@ -65,8 +66,15 @@ pw2.addEventListener('input', () => {
     submitBtn.classList.remove('disabled')
     confirmPasswordErrors.classList.add('d-none')
   }
+}
+
+pw1.addEventListener('input', function () {
+  pwMatch(this)
 })
 
+pw2.addEventListener('input', function () {
+  pwMatch(this)
+})
 
 
 /* submit data */
@@ -76,32 +84,22 @@ document.getElementById('signup-form').addEventListener('submit', async function
   const formData = new FormData(this);
   const formErrors = document.getElementById('form-errors');
   const usernameErrors = document.getElementById('username_error');
-  const firstNameErrors = document.getElementById('first_name_error');
-  const lastNameErrors = document.getElementById('last_name_error');
   const emailErrors = document.getElementById('email_error');
-  const passwordErrors = document.getElementById('password1_error');
-  
-  // Clear previous errors
-  formErrors.classList.add('d-none');
-  formErrors.textContent = '';
+  const password1Errors = document.getElementById('password1_error');
+  const password2Errors = document.getElementById('password2_error');
 
+  // Clear previous errors
   usernameErrors.classList.add('d-none');
   usernameErrors.textContent = '';
-
-  firstNameErrors.classList.add('d-none');
-  firstNameErrors.textContent = '';
-
-  lastNameErrors.classList.add('d-none');
-  lastNameErrors.textContent = '';
 
   emailErrors.classList.add('d-none');
   emailErrors.textContent = '';
 
-  passwordErrors.classList.add('d-none');
-  passwordErrors.textContent = '';
+  password1Errors.classList.add('d-none');
+  password1Errors.textContent = '';
 
-  confirmPasswordErrors.classList.add('d-none');
-  confirmPasswordErrors.textContent = '';
+  password2Errors.classList.add('d-none');
+  password2Errors.textContent = '';
 
   try {
     const response = await fetch(`${auth_endpoint}registration/`, {
@@ -138,24 +136,19 @@ document.getElementById('signup-form').addEventListener('submit', async function
         usernameErrors.textContent = data.username;
       }
 
-      if (data.first_name) {
-        firstNameErrors.classList.remove('d-none');
-        firstNameErrors.textContent = data.first_name;
-      }
-
-      if (data.last_name) {
-        lastNameErrors.classList.remove('d-none');
-        lastNameErrors.textContent = data.last_name;
-      }
-
       if (data.email) {
         emailErrors.classList.remove('d-none');
         emailErrors.textContent = data.email;
       }
 
       if (data.password1) {
-        passwordErrors.classList.remove('d-none');
-        passwordErrors.textContent = data.password1.join('\n');
+        password1Errors.classList.remove('d-none');
+        password1Errors.textContent = data.password1.join('\n');
+      }
+
+      if (data.password2) {
+        password2Errors.classList.remove('d-none');
+        password2Errors.textContent = data.password2.join('\n');
       }
     }
   } catch (error) {
@@ -164,5 +157,6 @@ document.getElementById('signup-form').addEventListener('submit', async function
     formErrors.textContent = 'An error occurred. Please try again.';
   }
 });
+
 
 

@@ -23,10 +23,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     postDetails.innerHTML = `
     <div class="card">
       <div class="card-body">
-        <h1 class="card-title">${post.title}</h1>
-        <p class="card-text">Author: ${post.author.first_name} ${post.author.last_name}</p>
-        <p class="card-text">${formatDateTime(post.created_at)}</p>
-        <img src="${post.post_pic}" class="img-fluid mb-4" style="max-height: 400px;" alt="${post.title}">
+        <h1 class="card-title text-center">${post.title}</h1>
+        <img src="${post.post_pic}" class="img-fluid mb-4 mx-auto d-block post-detail-img" alt="${post.title}">
+        <h6 class="card-text"><em>By ${post.author.first_name} ${post.author.last_name}</em></h6>
+        <h6 class="card-text"><em>${formatDateTime(post.created_at)}</em></h6>
+        <hr >
         <div class="card-text">${post.body}</div>
       </div>
      </div>

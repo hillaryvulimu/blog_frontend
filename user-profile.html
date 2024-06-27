@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <!-- shared styles loaded using js -->
+  <script src="./js/common/shared_styles.js"></script>
+</head>
+<body>
+  <header class="sticky-top" id="header"></header>
+  <main class="container">
+    <div class="row justify-content-center align-items-center">
+      <h2 class="col-md-7">YOUR PROFILE DETAILS</h2>
+      
+      <div class="col-md-7" id="immutables-form-container">
+        <!-- Immutable info -->
+        <h4>You can't change these</h4>
+        <form id="immutables" class="mb-4">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" id="username" disabled value="your-username" class="form-control">
+          </div>
+        
+          <div class="mb3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" disabled value="your@email.com" class="form-control">
+          </div>
+        </form>
+
+        <hr>
+        <!-- Editable info -->
+        <h4>You can change these details</h4>
+        <div id="profile-form-errors" class="alert alert-danger d-none">
+          <!-- display profile form errors here -->
+        </div>
+
+        <form id="profile-form" class="mb4">
+          <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" name="first_name" disabled id="first_name" class="form-control">
+          </div>
+
+          <div class="mb3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" name="last_name" disabled id="last_name" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="profile_pic" class="form-label"></label>
+            <input type="file" name="profile_pic" id="profile_pic" class="form-control" accept="image/*" disabled>
+          </div>
+          <div class="mb-3">
+            <button type="button" id="submit" class="btn btn-outline-primary w-100">Edit Details</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    
+  </main>  
+  
+  <footer id="footer"></footer>
+  <!-- custom scripts -->
+  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/user-profile.js"  type="module"></script>
+  
+  <!-- Bootstrap js -->
+  <script src="./js/common/load_bootstrap.js"></script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 import logout from './common/logout.js'
 import categories from './common/fetch_categories.js'
+import currentProfileInfo from './common/fetchProfileInfo.js'
 
 /* Function to add `active` class to active link */
 function highlightActiveLinks() {
@@ -11,6 +12,11 @@ function highlightActiveLinks() {
 
   // Loop through each nav link
   navLinks.forEach(link => {
+    // skip drop-downs
+    if(link.classList.contains('dropdown')){
+      return;
+    }
+    
     // Get the link's href attribute
     const href = link.getAttribute('href');
 
@@ -75,12 +81,26 @@ async function loadContent() {
   const token = localStorage.getItem('authToken'); 
   const signupLink  = document.getElementById('signup-link')
   const loginLink = document.getElementById('login-link')
-  const logoutLink  = document.getElementById('logout-link')
-  const profilePic = document.getElementById('profile-pic')
+  const profilePicToggle = document.getElementById('profile-toggle')
+  const profilePicImg = document.getElementById('profile-pic-img')
+  const profilePicLink = document.getElementById('profile-pic-link')
+  const welcomeUser = document.getElementById('welcome-user')
 
   if(token){
-    logoutLink.classList.remove('d-none')
-    profilePic.classList.remove('d-none')
+    // get user info
+    const data = await currentProfileInfo('GET')
+
+    // enable options for logged in user
+    profilePicToggle.classList.remove('d-none')
+
+    // get google's initials based on first name if no profile pic uploaded, 
+    //default to '?' if no 1st name
+    welcomeUser.textContent = `Hi, ${data.first_name}`
+    const firstName = data.first_name
+    const initials = firstName ? firstName.charAt(0).toUpperCase() : '?';
+    const imgUrl = `https://ui-avatars.com/api/?name=${initials}&background=random&size=30&rounded=true&fontSize=0.7`;
+
+    profilePicImg.setAttribute('src', data.profile_pic ? data.profile_pic : imgUrl)
   } else{
     signupLink.classList.remove('d-none')
     loginLink.classList.remove('d-none')
@@ -89,7 +109,7 @@ async function loadContent() {
   // Logout functionality
   logout()
 
-  // Load the current theme from local storage if abailable
+  // Load the current theme from local storage if available
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
       htmlTag.setAttribute('data-bs-theme', savedTheme);
