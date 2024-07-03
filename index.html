@@ -6,23 +6,17 @@
   <title>Home</title>
   <!-- shared styles loaded using js -->
   <script src="./js/common/shared_styles.js"></script>
+
+  
 </head>
 <body>
   <header class="sticky-top" id="header"></header>
   <main class="container">
-    <!-- Home page slideshow -->
-    <div id="latest-posts-slideshow" class="carousel slide d-none d-sm-block">
-      <!-- using js to get posts for slideshow -->
-
-      <button class="carousel-control-prev" type="button" data-bs-target="#latest-posts-slideshow" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#latest-posts-slideshow" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div> 
+    <!-- Home page featured post -->
+    <div id="featured-post" class="container-fluid d-none d-sm-block">
+      <img src="./misc/placeholder2.jpg" alt="featured-post" id="featured-post-img" class="img-fluid" >
+      <h4 class="text-center">Featured: <a href="#" id="featured-post-link"></a></h4>
+    </div>
 
     <!-- Latest posts -->
     <div class="container latest-posts" id="latest-posts">      

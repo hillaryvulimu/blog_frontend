@@ -110,6 +110,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         formErrors.classList.remove('alert-danger', 'd-none')
         formErrors.classList.add('alert-success')
         formErrors.textContent = 'Profile details updated. If the changes haven\'t been updated automatically, refresh the page to update.'
+
+        // disable update btn again 
+        submit.disabled = true;
       }
       else {
         formErrors.textContent = 'Profile update failed: Empty response';

@@ -1,71 +1,21 @@
 import fetchPosts from './common/fetchPosts.js';
 
-/* slideshow function */
+/* featured post function */
 function createSlideshow(data) {
-  const fragment = document.createDocumentFragment();
+  // get featured post's elements
+  const featuredPost = document.getElementById('featured-post')
+  const featuredPostImg = document.getElementById('featured-post-img')
+  const featuredPostLink = document.getElementById('featured-post-link')
 
-  // Create carousel indicators
-  const indicatorsContainer = document.createElement('div');
-  indicatorsContainer.classList.add('carousel-indicators');
-
-  data.forEach((post, index) => {
-      const indicatorButton = document.createElement('button');
-      indicatorButton.setAttribute('type', 'button');
-      indicatorButton.setAttribute('data-bs-target', '#latest-posts-slideshow');
-      indicatorButton.setAttribute('data-bs-slide-to', `${index}`);
-      indicatorButton.setAttribute('aria-label', `Slide ${index + 1}`);
-      if (index === 0) {
-          indicatorButton.classList.add('active');
-          indicatorButton.setAttribute('aria-current', 'true');
-      }
-      indicatorsContainer.appendChild(indicatorButton);
-  });
-
-  // Create carousel inner
-  const innerContainer = document.createElement('div');
-  innerContainer.classList.add('carousel-inner');
 
   data.forEach((post, index) => {
-      const carouselItem = document.createElement('div');
-      carouselItem.classList.add('carousel-item');
+    // feature only the first (latest) post
       if (index === 0) {
-          carouselItem.classList.add('active');
+          featuredPostImg.src = post.post_pic
+          featuredPostLink.href = './post_detail.html?nm=' + post.slug
+          featuredPostLink.textContent = post.title
       }
-
-      const imgElement = document.createElement('img');
-      imgElement.src = post.post_pic; 
-      imgElement.classList.add('d-block', 'w-100');
-      imgElement.alt = post.title;
-
-      const captionContainer = document.createElement('div');
-      captionContainer.classList.add('carousel-caption', 'd-none', 'd-sm-block');
-
-      const titleElement = document.createElement('h5');
-      const titleLink = document.createElement('a');
-      titleLink.classList.add('carousel-link-item')
-      titleLink.href = `./post_detail.html?nm=${post.slug}`;
-      titleLink.textContent = post.title;
-      
-
-      const contentElement = document.createElement('p');
-      contentElement.textContent = post.body.substring(0, 40) + '...';
-      
-      // append accordingly 
-      titleElement.appendChild(titleLink);
-
-      captionContainer.appendChild(titleElement);
-      captionContainer.appendChild(contentElement);
-
-      carouselItem.appendChild(imgElement);
-      carouselItem.appendChild(captionContainer);
-
-      innerContainer.appendChild(carouselItem);
   });
-
-  fragment.appendChild(indicatorsContainer);
-  fragment.appendChild(innerContainer);
-
-  return fragment;
 }
 
 
@@ -150,10 +100,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
       const data = await fetchPosts({ page: 1});
-      // create slide show with 4 posts
-      const slideshowFragment = createSlideshow(data.results.slice(0, 4));
-      
-      slideshowContainer.appendChild(slideshowFragment);
+      // create featured post
+      createSlideshow(data.results.slice(0, 1));
+
 
       // create 6 sample post cards
       const cardsFragment = createHomePostCards(data.results.slice(0, 6));

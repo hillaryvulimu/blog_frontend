@@ -79,6 +79,41 @@ p.post-info, p.author {
   color: black;
 }
 
+#featured-post {
+  position: relative;
+  width: 100%;
+}
+
+#featured-post > h4 {
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  padding: 10px 4px;
+  margin: 0;
+  background-color: #202020d1;
+  color: white;
+}
+
+#featured-post > h4 a {
+  color: #ffe0a8;
+  text-decoration: none;
+}
+
+#featured-post > h4  a:hover {
+  text-decoration: underline;
+}
+
+#featured-post-img {
+  margin: auto;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+  width: 100%;
+  height: 50vh;
+}
+
+
 
 /* Custom css for categories menu */
 #dropdown-categories-list li a {
