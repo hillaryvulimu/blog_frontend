@@ -49,6 +49,7 @@
 
 1. Fork or clone the repository from [blog_frontend](https://github.com/hillaryvulimu/blog_frontend).
 2. Update the `endpoints.js` with the correct endpoints based on how the blogapi backend is set up.
+ - In deployment, add the `BACKEND_ENDPOINT` variable on the host platform (e.g. Vercel). It should be pointing to the backend URL (e.g. Render's backend), with the local backend (at `http://127.0.0.1:8000`) as the default.
 3. To use Bootstrap from the local drive, update the `bootstrapJsOffline` constant in `load_bootstrap.js` and `bootstrapCssOffline` in `shared_styles.js` with the correct directory for your Bootstrap JS and CSS (Bootstrap 5.3.3).
 
 ## Usage
