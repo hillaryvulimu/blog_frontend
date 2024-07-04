@@ -1,6 +1,4 @@
 // Added to each page to load bootstrap js
-
-const bootstrapJsOffline = './misc/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js'
 const bootstrapJsCDN = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'
 const bodyElement = document.querySelector('body')
 
@@ -8,9 +6,10 @@ const bodyElement = document.querySelector('body')
 const jsIntegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
 const jsCrossorigin="anonymous"
 
+
 const loadBootstrapJs = () =>{
-  // check for local/cached bootstrap
-  const cachedJs = localStorage.getItem('bootstrapJsLink') || bootstrapJsOffline;
+  // check for cached bootstrap
+  const cachedJs = localStorage.getItem('bootstrapJsLink');
 
   // load cached js if available, else load cdn
   const bootstrapJsLink = cachedJs ? cachedJs : bootstrapJsCDN;

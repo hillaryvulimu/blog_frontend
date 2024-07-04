@@ -41,16 +41,15 @@
 - **endpoints.js**: Lists all backend endpoints for performing fetch requests.
 - **fetch_categories.js**: Fetches current post categories from the backend and adds them to the Categories option in the top nav bar.
 - **fetchPosts.js**: Fetches posts based on conditions (e.g., latest posts for `index.html`, all posts with pagination for `posts.html`, and search results).
-- **load_bootstrap.js**: Checks for `bootstrap.bundle.min.js` in a specified local directory or localStorage. If not available, it fetches from Bootstrap CDN (Bootstrap 5.3.3).
+- **load_bootstrap.js**: Fetches bootstrap.js from Bootstrap CDN (Bootstrap 5.3.3).
 - **logout.js**: Contains the logout logic and is imported into `main.js` for use on all pages. Logging out redirects to `login.html`.
-- **shared_styles.js**: Loads custom styles and Bootstrap CSS similar to `load_bootstrap.js` (Bootstrap 5.3.3).
+- **shared_styles.js**: Loads custom shared styles and also fetches bootstrap css from bootstrap CDN (Bootstrap 5.3.3).
 
 ## Installation
 
 1. Fork or clone the repository from [blog_frontend](https://github.com/hillaryvulimu/blog_frontend).
 2. Update the `endpoints.js` with the correct endpoints based on how the blogapi backend is set up.
- - In deployment, add the `BACKEND_ENDPOINT` variable on the host platform (e.g. Vercel). It should be pointing to the backend URL (e.g. Render's backend), with the local backend (at `http://127.0.0.1:8000`) as the default.
-3. To use Bootstrap from the local drive, update the `bootstrapJsOffline` constant in `load_bootstrap.js` and `bootstrapCssOffline` in `shared_styles.js` with the correct directory for your Bootstrap JS and CSS (Bootstrap 5.3.3).
+ - It checks the base url, and if in development (local server), it uses the local (Django) backend. If in production, it uses the production backend (e.g. Render). These settings can be changed in the file.
 
 ## Usage
 

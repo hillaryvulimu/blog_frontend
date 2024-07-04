@@ -1,15 +1,14 @@
 const headElement = document.querySelector('head');
 const mainStyles = './css/main_styles.css';
 const bootstrapCssCdn = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css';
-const bootstrapCssOffline = './misc/bootstrap-5.3.3-dist/css/bootstrap.min.css';
 
 // set integrity and crossorigin for CDN
 const cssIntegrity = "sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH";
 const cssCrossorigin = "anonymous";
 
 const loadStyles = () => {
-  // load local/cached css bootstrap css if available
-  const cachedCss = localStorage.getItem('cachedCss') || bootstrapCssOffline;
+  // load cached css bootstrap css if available
+  const cachedCss = localStorage.getItem('cachedCss');
   const bootstrapCssUrl = cachedCss ? cachedCss : bootstrapCssCdn;
 
   const fragment = document.createDocumentFragment();
