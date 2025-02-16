@@ -1,6 +1,6 @@
 # blog_frontend
 
-![Project Logo](./images/logo.png)
+![Project Logo](./images/logo.jpg)
 
 ## Table of Contents
 
