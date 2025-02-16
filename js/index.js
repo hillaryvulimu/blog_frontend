@@ -8,6 +8,16 @@ function createSlideshow(data) {
   const featuredPostLink = document.getElementById('featured-post-link')
 
 
+  // Inform user no posts yet if no..well...posts
+  if (data.length === 0) {
+    featuredPost .innerHTML = `
+    <h1 class="text-center">Welcome to Ace Game Zone (AGZ)!</h1>
+    <p class="text-center">
+      Your go-to space for discussions, reviews, and insights into the world of board, card, and casual games.
+    </p>`;
+    return
+  }
+
   data.forEach((post, index) => {
     // feature only the first (latest) post
       if (index === 0) {

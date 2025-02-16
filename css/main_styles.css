@@ -1,3 +1,12 @@
+/* Custom style for Theme toggle btn */
+#theme-toggle {
+  border: none;
+}
+
+#theme-toggle:hover {
+  background: none;
+}
+
 /* Custom CSS for the slideshow */
 .carousel-item img {
   max-width: 80%;

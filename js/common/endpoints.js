@@ -5,7 +5,7 @@
 let BACKEND_ENDPOINT;
 const baseUrl = window.location.origin
 
-if (1==2){
+if (baseUrl.includes('http://127.0.0.1') || baseUrl.includes('http://localhost')){
   BACKEND_ENDPOINT = 'http://127.0.0.1:8000';
 }
 else {

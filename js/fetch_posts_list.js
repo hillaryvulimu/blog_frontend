@@ -54,6 +54,10 @@ function createPostCard(post) {
 
 // function to update pagination
 function updatePaginationControls(page, totalPages) {
+  if (totalPages <= 1) {
+    return 
+  }
+
   const postsUrl = './posts.html'
   const paginationContainer = document.getElementById('pagination-container');
   paginationContainer.innerHTML = '';
