@@ -1,4 +1,5 @@
 import fetchPosts from './common/fetchPosts.js';
+import { posts_base_endpoint } from "./common/endpoints.js";
 
 // Helper function to format date created
 function formatDateTime(dateTimeString) {
@@ -38,8 +39,11 @@ function createPostCard(post) {
         <img src="${post.post_pic}" class="card-img-top img-fluid" alt="${post.title}">
         <div class="card-body">
           <p class="post-info">
-            <span class="post-category">${post.category} &#183;</span>
-            <span class="date-created">${formatDateTime(post.created_at)}</span>
+            <span class="post-category">
+              <a href="?category=${post.category}">
+                ${post.category.toLowerCase()}
+              </a>
+            </span>
           </p>
           <h5 class="card-title">${post.title}</h5>
           <p class="author">By ${post.author.first_name}</p>
